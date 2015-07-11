@@ -7,6 +7,7 @@
 //
 
 #import "Instagram.h"
+#import "RUSingleton.h"
 
 
 static NSString* kDialogBaseURL         = @"https://instagram.com/";
@@ -20,7 +21,6 @@ static void *finishedContext            = @"finishedContext";
 @interface Instagram ()
 
 @property(nonatomic, strong) NSArray* scopes;
-@property(nonatomic, strong) NSString* clientId;
 
 -(void)authorizeWithSafari;
 
@@ -34,13 +34,17 @@ static void *finishedContext            = @"finishedContext";
 @synthesize scopes = _scopes;
 @synthesize clientId = _clientId;
 
--(id)initWithClientId:(NSString*)clientId delegate:(id<IGSessionDelegate>)delegate {
+#pragma mark - Singleton
+RUSingletonUtil_Synthesize_Singleton_Implementation_SharedInstance
+
+- (id)init
+{
     self = [super init];
-    if (self) {
-        self.clientId = clientId;
-        self.sessionDelegate = delegate;
+    if(self)
+    {
         _requests = [[NSMutableSet alloc] init];
     }
+    
     return self;
 }
 

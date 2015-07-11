@@ -16,8 +16,9 @@
 
 @property(nonatomic, strong) NSString* accessToken;
 @property(nonatomic, weak) id<IGSessionDelegate> sessionDelegate;
+@property(nonatomic, strong) NSString* clientId;
 
--(id)initWithClientId:(NSString*)clientId delegate:(id<IGSessionDelegate>)delegate;
++ (instancetype)sharedInstance;
 
 -(void)authorize:(NSArray*)scopes;
 
