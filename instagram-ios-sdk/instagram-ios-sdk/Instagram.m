@@ -70,7 +70,7 @@ RUSingletonUtil_Synthesize_Singleton_Implementation_SharedInstance
     for (NSHTTPCookie* cookie in instagramCookies) {
         [cookies deleteCookie:cookie];
     }
-
+    
     if ([self.sessionDelegate respondsToSelector:@selector(igSessionInvalidated)]) {
         [self.sessionDelegate igSessionInvalidated];
     }
@@ -103,10 +103,10 @@ RUSingletonUtil_Synthesize_Singleton_Implementation_SharedInstance
             if (errType && [errType isEqualToString:@"OAuthAccessTokenException"]) {
                 [self logout];
             }
-//            [self invalidateSession];
-//            if ([self.sessionDelegate respondsToSelector:@selector(igSessionInvalidated)]) {
-//                [self.sessionDelegate igSessionInvalidated];
-//            }
+            //            [self invalidateSession];
+            //            if ([self.sessionDelegate respondsToSelector:@selector(igSessionInvalidated)]) {
+            //                [self.sessionDelegate igSessionInvalidated];
+            //            }
         }
         if (requestState == kIGRequestStateComplete || requestState == kIGRequestStateError) {
             [_request removeObserver:self forKeyPath:requestFinishedKeyPath];
@@ -144,14 +144,14 @@ RUSingletonUtil_Synthesize_Singleton_Implementation_SharedInstance
 }
 
 - (NSDictionary*)parseURLParams:(NSString *)query {
-	NSArray *pairs = [query componentsSeparatedByString:@"&"];
-	NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-	for (NSString *pair in pairs) {
-		NSArray *kv = [pair componentsSeparatedByString:@"="];
-		NSString *val = [[kv objectAtIndex:1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSArray *pairs = [query componentsSeparatedByString:@"&"];
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    for (NSString *pair in pairs) {
+        NSArray *kv = [pair componentsSeparatedByString:@"="];
+        NSString *val = [[kv objectAtIndex:1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         
-		[params setObject:val forKey:[kv objectAtIndex:0]];
-	}
+        [params setObject:val forKey:[kv objectAtIndex:0]];
+    }
     return params;
 }
 
@@ -178,7 +178,7 @@ RUSingletonUtil_Synthesize_Singleton_Implementation_SharedInstance
     NSString *accessToken = [params valueForKey:@"access_token"];
     
     // If the URL doesn't contain the access token, an error has occurred.
-    if (!accessToken) {        
+    if (!accessToken) {
         NSString *errorReason = [params valueForKey:@"error_reason"];
         
         BOOL userDidCancel = [errorReason isEqualToString:@"user_denied"];
@@ -230,7 +230,7 @@ RUSingletonUtil_Synthesize_Singleton_Implementation_SharedInstance
     
 }
 
-#pragma mark 
+#pragma mark
 
 /**
  * Set the authToken after login succeed
